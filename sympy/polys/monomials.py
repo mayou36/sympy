@@ -64,30 +64,21 @@ def itermonomials(variables, max_degree, min_degree = 0):
         return {S(1)}
     # Force to list in case of passed tuple or other incompatible collection
     variables = list(variables) + [S(1)]
+    monomials_list = []
     if all(variable.is_commutative for variable in variables):
-        monomials_list_comm = []
-        for item in combinations_with_replacement(variables, max_degree):
-            powers = dict()
-            for variable in variables:
-                powers[variable] = 0
-            for variable in item:
-                if variable != 1:
-                    powers[variable] += 1
-            if sum(powers.values()) >= min_degree:
-                monomials_list_comm.append(Mul(*item))
-        return set(monomials_list_comm)
+        itr = combinations_with_replacement(variables, max_degree)
     else:
-        monomials_list_non_comm = []
-        for item in product(variables, repeat=max_degree):
-            powers = dict()
-            for variable in variables:
-                powers[variable] = 0
-            for variable in item:
-                if variable != 1:
-                    powers[variable] += 1
-            if sum(powers.values()) >= min_degree:
-                monomials_list_non_comm.append(Mul(*item))
-        return set(monomials_list_non_comm)
+        itr = product(variables, repeat=max_degree)
+    for item in itr:
+        powers = dict()
+        for variable in variables:
+            powers[variable] = 0
+        for variable in item:
+            if variable != 1:
+                powers[variable] += 1
+        if sum(powers.values()) >= min_degree:
+            monomials_list.append(Mul(*item))
+    return set(monomials_list)
 
 def monomial_count(V, N):
     r"""
