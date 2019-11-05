@@ -19,15 +19,9 @@ from sympy.ntheory import multiplicity
 
 # sympy.printing imports
 from sympy.printing.precedence import precedence_traditional
-<<<<<<< HEAD
-from .printer import Printer, _print_Integer__scientific
-from .conventions import split_super_sub, requires_partial
-from .precedence import precedence, PRECEDENCE
-=======
-from sympy.printing.printer import Printer
+from sympy.printing.printer import Printer, _print_Integer__scientific
 from sympy.printing.conventions import split_super_sub, requires_partial
 from sympy.printing.precedence import precedence, PRECEDENCE
->>>>>>> master
 
 import mpmath.libmp as mlib
 from mpmath.libmp import prec_to_dps
@@ -412,7 +406,6 @@ class LatexPrinter(Printer):
                 str_real = str_real.replace('.','{,}')
             return str_real
 
-<<<<<<< HEAD
     def _print_Integer(self, expr):
         scientific = _print_Integer__scientific(self, expr)
         if scientific is None:
@@ -421,7 +414,7 @@ class LatexPrinter(Printer):
             return scientific
 
     _print_int = _print_long = _print_Integer
-=======
+
     def _print_Cross(self, expr):
         vec1 = expr._expr1
         vec2 = expr._expr2
@@ -449,7 +442,6 @@ class LatexPrinter(Printer):
     def _print_Laplacian(self, expr):
         func = expr._expr
         return r"\triangle %s" % self.parenthesize(func, PRECEDENCE['Mul'])
->>>>>>> master
 
     def _print_Mul(self, expr):
         from sympy.core.power import Pow
