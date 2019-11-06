@@ -604,7 +604,7 @@ class StrPrinter(Printer):
         else:
             return scientific
 
-    _print_int = _print_long = _print_Integer
+        _print_int = _print_long = _print_Integer
         if self._settings.get("sympy_integers", False):
             return "S(%s)" % (expr)
         return str(expr.p)
